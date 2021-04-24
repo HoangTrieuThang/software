@@ -1,0 +1,11 @@
+com/example/software/model/User.class
+com/example/software/model/NewsKind.class
+com/example/software/model/AdminRole.class
+com/example/software/model/History.class
+com/example/software/repository/UserRepository.class
+com/example/software/model/Admin.class
+com/example/software/model/Gender.class
+com/example/software/model/News.class
+com/example/software/model/Comment.class
+com/example/software/model/AdminNews.class
+com/example/software/SoftwareApplication.class
