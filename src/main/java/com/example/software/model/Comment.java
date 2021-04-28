@@ -18,7 +18,7 @@ public class Comment {
     @Id
     @GeneratedValue
     private int comment_id;
-    private Text comment_conten;
+    private String comment_conten;
     private int lever;
     private int parent_id;
 

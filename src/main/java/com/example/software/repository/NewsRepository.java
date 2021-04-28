@@ -11,12 +11,7 @@ import javax.swing.text.AbstractDocument;
 import java.util.Date;
 import java.util.List;
 
-@Repository
 public interface NewsRepository extends JpaRepository<News,Integer> {
-
-    Iterable<News> findNewsByNews_date(Date news_date);
-
-    Iterable<News> findNewsByContentAllIgnoreCase(Text content);
 
 //    @Query("from news where news_date limit 5 order by ")
 //    News newsQuerySearch(Text news_date);

@@ -20,9 +20,9 @@ public class News {
     @Id
     @GeneratedValue
     private int news_id;
-    private Text title;
-    private Text content;
-    private Text news_desc;
+    private String title;
+    private String content;
+    private String news_desc;
     private String news_source;
     private Timestamp news_date;
     private int view_count;

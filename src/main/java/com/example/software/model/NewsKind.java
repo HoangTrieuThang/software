@@ -18,7 +18,7 @@ public class NewsKind {
     @GeneratedValue
     private int news_kind;
 
-    @OneToMany(mappedBy="news_kind")
+    @OneToMany(mappedBy="newsKind")
     private Collection<News> news;
 
 }

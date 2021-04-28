@@ -12,20 +12,20 @@ import java.util.Optional;
 @RequestMapping(path = "/news", produces = "application/json")
 public class NewsController {
 
-    @Autowired
-    private NewsRepository newsRepository;
+//    @Autowired
+//    private NewsRepository newsRepository;
 
-    @GetMapping("api/list")
-    public Iterable<News> getListNews(){
-        return newsRepository.findAll();
-    }
-
-    @GetMapping("api/list/{name}")
-    public Optional<News> getListOfLatestArticles(@PathVariable(value = "id") Integer id){
-        Optional<News> newsSearch = newsRepository.findById(id);
-        return newsSearch;
-
-    }
+//    @GetMapping("api/list")
+//    public Iterable<News> getListNews(){
+//        return newsRepository.findAll();
+//    }
+//
+//    @GetMapping("api/list/{name}")
+//    public Optional<News> getListOfLatestArticles(@PathVariable(value = "id") Integer id){
+//        Optional<News> newsSearch = newsRepository.findById(id);
+//        return newsSearch;
+//
+//    }
 
 //    @GetMapping("api/search/{content}")
 //    public Iterable<News> getNewsByContent(@PathVariable(value = "content") Text content){
