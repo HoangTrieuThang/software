@@ -12,7 +12,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Table(name = "user")
+@Table(name = "gender")
 public class Gender {
     @Id
     @GeneratedValue

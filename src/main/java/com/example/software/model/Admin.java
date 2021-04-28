@@ -27,7 +27,7 @@ public class Admin {
     private String admin_address;
     private String admin_country;
     private String knowledge;
-    private Text admin_desc;
+    private String admin_desc;
 
 
     @ManyToOne
@@ -37,6 +37,7 @@ public class Admin {
     @ManyToOne
     @JoinColumn(name="admin_role_id")
     private AdminRole adminRole;
+
 
     @OneToMany(mappedBy = "admin")
     private Collection<AdminNews> adminNews;
