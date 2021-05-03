@@ -1,19 +1,39 @@
 package com.example.software.controller.usercontroller;
 
+import com.example.software.common.ApiResponse;
 import com.example.software.model.News;
 import com.example.software.repository.NewsRepository;
+import com.example.software.services.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.w3c.dom.Text;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/news", produces = "application/json")
+@RequestMapping("/api/news")
+@CrossOrigin(origins = {"*"})
 public class NewsController {
 
-//    @Autowired
-//    private NewsRepository newsRepository;
+    @Autowired
+    private NewsService newsService;
+
+    @GetMapping("getAlls")
+    public ResponseEntity<ApiResponse> getAllNews() {
+        ApiResponse object = new ApiResponse();
+        List<News> newsList= newsService.getAllNews();
+        if(newsList != null) {
+            object.setData(newsList);
+            object.setCode(200);
+            object.setErrors(null);
+            object.setStatus(true);
+            return new ResponseEntity<ApiResponse>(object, HttpStatus.OK);
+        }
+        return null;
+    }
 
 //    @GetMapping("api/list")
 //    public Iterable<News> getListNews(){
