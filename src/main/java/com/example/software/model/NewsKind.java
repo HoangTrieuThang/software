@@ -17,6 +17,7 @@ public class NewsKind {
     @Id
     @GeneratedValue
     private int news_kind;
+    private String news_kind_name;
 
     @OneToMany(mappedBy="newsKind")
     private Collection<News> news;

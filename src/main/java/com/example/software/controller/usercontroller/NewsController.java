@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.w3c.dom.Text;
 
+import java.security.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +20,8 @@ public class NewsController {
 
     @Autowired
     private NewsService newsService;
+    @Autowired
+    private NewsRepository newsRepository;
 
     @GetMapping("getAlls")
     public ResponseEntity<ApiResponse> getAllNews() {
@@ -34,6 +36,33 @@ public class NewsController {
         }
         return null;
     }
+
+    @GetMapping("date")
+    public List<News> getNewsByDate(@PathVariable("news_date")Timestamp news_date){
+        List<News> newsList = newsRepository.findByNews_date(news_date);
+        return newsList;
+    }
+
+    @GetMapping("views")
+    public List<News> getNewsByViews(@PathVariable("view_count")int view_count){
+        List<News> newsViews = newsRepository.findByView_count(view_count);
+        return newsViews;
+    }
+
+    @GetMapping("{id}")
+    public Optional<News> getNewsById(@PathVariable("id") Integer integer){
+        Optional<News> getNewsById = newsRepository.findById(integer);
+        return getNewsById;
+    }
+
+    @GetMapping("/search/{keyword}")
+    public List<News> searchNewsByKeyWord(@PathVariable("keyword") String keyword){
+        List<News> searchNews= newsRepository.findByContent(keyword);
+        return searchNews;
+    }
+
+
+
 
 //    @GetMapping("api/list")
 //    public Iterable<News> getListNews(){

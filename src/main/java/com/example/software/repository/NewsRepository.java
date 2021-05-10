@@ -1,20 +1,27 @@
 package com.example.software.repository;
 
 import com.example.software.model.News;
-import org.hibernate.sql.Select;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
-import org.w3c.dom.Text;
 
-import javax.swing.text.AbstractDocument;
-import java.util.Date;
+import java.security.Timestamp;
 import java.util.List;
+import java.util.Optional;
+
 
 public interface NewsRepository extends JpaRepository<News,Integer> {
 
-//    @Query("from news where news_date limit 5 order by ")
-//    News newsQuerySearch(Text news_date);
+    @Override
+    List<News> findAll();
 
+    @Query(value = "select * from news order by news_date desc limit 10", nativeQuery = true)
+    List<News> findByNews_date(Timestamp news_date);
 
+    @Query(value = "select * from news order by view_count desc limit 10", nativeQuery = true)
+    List<News> findByView_count(int view_count);
+
+    @Override
+    Optional<News> findById(Integer integer);
+
+    List<News> findByContent(String keyword);
 }
