@@ -1,161 +1,244 @@
-/*
- Navicat Premium Data Transfer
+-- MySQL Workbench Forward Engineering
 
- Source Server         : localDB
- Source Server Type    : MySQL
- Source Server Version : 100414
- Source Host           : localhost:3306
- Source Schema         : projectdb
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
- Target Server Type    : MySQL
- Target Server Version : 100414
- File Encoding         : 65001
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema software
+-- -----------------------------------------------------
 
- Date: 23/04/2021 08:18:18
-*/
+-- -----------------------------------------------------
+-- Schema software
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `software` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `software` ;
 
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
+-- -----------------------------------------------------
+-- Table `software`.`gender`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `software`.`gender` (
+                                                   `gender_id` INT NOT NULL AUTO_INCREMENT,
+                                                   `gender_name` VARCHAR(255) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                                                   PRIMARY KEY USING BTREE (`gender_id`))
+    ENGINE = InnoDB
+    AUTO_INCREMENT = 4
+    DEFAULT CHARACTER SET = utf8
+    ROW_FORMAT = DYNAMIC;
 
--- ----------------------------
--- Table structure for admin
--- ----------------------------
-DROP TABLE IF EXISTS `admin`;
-CREATE TABLE `admin`  (
-                          `admin_id` int(11) NOT NULL AUTO_INCREMENT,
-                          `admin_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-                          `knowledge` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-                          `gender_id` int(11) NULL DEFAULT NULL,
-                          `admin_desc` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
-                          `admin_email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-                          `admin_age` int(11) NULL DEFAULT NULL,
-                          `admin_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-                          `admin_country` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-                          `employees_group` int(11) NULL DEFAULT NULL,
-                          `admin_role_id` int(11) NULL DEFAULT NULL,
-                          `admin_salary` int(11) NULL DEFAULT NULL,
-                          PRIMARY KEY (`admin_id`) USING BTREE,
-                          INDEX `fk_employees_employees_2`(`admin_role_id`) USING BTREE,
-                          INDEX `fk_employees_employees_6`(`gender_id`) USING BTREE,
-                          CONSTRAINT `fk_admin_gender` FOREIGN KEY (`gender_id`) REFERENCES `gender` (`gender_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-                          CONSTRAINT `fk_admin_role` FOREIGN KEY (`admin_role_id`) REFERENCES `admin_role` (`admin_role_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
--- ----------------------------
--- Table structure for admin_news
--- ----------------------------
-DROP TABLE IF EXISTS `admin_news`;
-CREATE TABLE `admin_news`  (
-                               `admin_news_id` int(11) NOT NULL,
-                               `admin_id` int(11) NULL DEFAULT NULL,
-                               `news_id` int(11) NULL DEFAULT NULL,
-                               PRIMARY KEY (`admin_news_id`) USING BTREE,
-                               INDEX `fk_admin_news1`(`admin_id`) USING BTREE,
-                               INDEX `fk_admin_news2`(`news_id`) USING BTREE,
-                               CONSTRAINT `fk_admin_news1` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`admin_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-                               CONSTRAINT `fk_admin_news2` FOREIGN KEY (`news_id`) REFERENCES `news` (`news_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+-- -----------------------------------------------------
+-- Table `software`.`admin_role`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `software`.`admin_role` (
+                                                       `admin_role_id` INT NOT NULL AUTO_INCREMENT,
+                                                       `admin_role_name` VARCHAR(255) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                                                       PRIMARY KEY USING BTREE (`admin_role_id`))
+    ENGINE = InnoDB
+    AUTO_INCREMENT = 4
+    DEFAULT CHARACTER SET = utf8
+    ROW_FORMAT = DYNAMIC;
 
--- ----------------------------
--- Table structure for admin_role
--- ----------------------------
-DROP TABLE IF EXISTS `admin_role`;
-CREATE TABLE `admin_role`  (
-                               `admin_role_id` int(11) NOT NULL AUTO_INCREMENT,
-                               `admin_role_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-                               PRIMARY KEY (`admin_role_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
--- ----------------------------
--- Table structure for comment
--- ----------------------------
-DROP TABLE IF EXISTS `comment`;
-CREATE TABLE `comment`  (
-                            `comment_id` int(11) NOT NULL AUTO_INCREMENT,
-                            `news_id` int(11) NULL DEFAULT NULL,
-                            `user_id` int(11) NULL DEFAULT NULL,
-                            `comment_content` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
-                            `level` int(11) NULL DEFAULT 1,
-                            `parent_id` int(11) NULL DEFAULT NULL,
-                            PRIMARY KEY (`comment_id`) USING BTREE,
-                            INDEX `fk_comment_comment_2`(`news_id`) USING BTREE,
-                            INDEX `fk_comment_comment_3`(`user_id`) USING BTREE,
-                            CONSTRAINT `fk_comment_comment_2` FOREIGN KEY (`news_id`) REFERENCES `news` (`news_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-                            CONSTRAINT `fk_comment_comment_3` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+-- -----------------------------------------------------
+-- Table `software`.`admin`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `software`.`admin` (
+                                                  `admin_id` INT NOT NULL AUTO_INCREMENT,
+                                                  `admin_name` VARCHAR(255) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                                                  `knowledge` VARCHAR(255) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                                                  `gender_id` INT NULL DEFAULT NULL,
+                                                  `admin_desc` TEXT CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                                                  `admin_email` VARCHAR(255) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                                                  `admin_age` INT NULL DEFAULT NULL,
+                                                  `admin_address` VARCHAR(255) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                                                  `admin_country` VARCHAR(255) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                                                  `employees_group` INT NULL DEFAULT NULL,
+                                                  `admin_role_id` INT NULL DEFAULT NULL,
+                                                  `admin_salary` INT NULL DEFAULT NULL,
+                                                  `employee_group` INT NOT NULL,
+                                                  PRIMARY KEY USING BTREE (`admin_id`),
+                                                  INDEX `fk_employees_employees_2` USING BTREE (`admin_role_id`) VISIBLE,
+                                                  INDEX `fk_employees_employees_6` USING BTREE (`gender_id`) VISIBLE,
+                                                  CONSTRAINT `fk_admin_gender`
+                                                      FOREIGN KEY (`gender_id`)
+                                                          REFERENCES `software`.`gender` (`gender_id`)
+                                                          ON DELETE RESTRICT
+                                                          ON UPDATE RESTRICT,
+                                                  CONSTRAINT `fk_admin_role`
+                                                      FOREIGN KEY (`admin_role_id`)
+                                                          REFERENCES `software`.`admin_role` (`admin_role_id`)
+                                                          ON DELETE RESTRICT
+                                                          ON UPDATE RESTRICT)
+    ENGINE = InnoDB
+    AUTO_INCREMENT = 3
+    DEFAULT CHARACTER SET = utf8
+    ROW_FORMAT = DYNAMIC;
 
--- ----------------------------
--- Table structure for gender
--- ----------------------------
-DROP TABLE IF EXISTS `gender`;
-CREATE TABLE `gender`  (
-                           `gender_id` int(11) NOT NULL AUTO_INCREMENT,
-                           `gender_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-                           PRIMARY KEY (`gender_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
--- ----------------------------
--- Table structure for history
--- ----------------------------
-DROP TABLE IF EXISTS `history`;
-CREATE TABLE `history`  (
-                            `history_id` int(255) NOT NULL,
-                            `user_id` int(11) NULL DEFAULT NULL,
-                            `news_id` int(11) NULL DEFAULT NULL,
-                            `like` tinyint(1) NULL DEFAULT NULL COMMENT '0 là ko like,1 là like',
-                            PRIMARY KEY (`history_id`) USING BTREE,
-                            INDEX `fk_history_user`(`user_id`) USING BTREE,
-                            INDEX `fk_history_news`(`news_id`) USING BTREE,
-                            CONSTRAINT `fk_history_news` FOREIGN KEY (`news_id`) REFERENCES `news` (`news_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-                            CONSTRAINT `fk_history_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+-- -----------------------------------------------------
+-- Table `software`.`news_kind`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `software`.`news_kind` (
+                                                      `news_kind_id` INT NOT NULL AUTO_INCREMENT,
+                                                      `news_kind_name` VARCHAR(255) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                                                      `news_kind` INT NOT NULL,
+                                                      PRIMARY KEY USING BTREE (`news_kind_id`))
+    ENGINE = InnoDB
+    AUTO_INCREMENT = 3
+    DEFAULT CHARACTER SET = utf8
+    ROW_FORMAT = DYNAMIC;
 
--- ----------------------------
--- Table structure for news
--- ----------------------------
-DROP TABLE IF EXISTS `news`;
-CREATE TABLE `news`  (
-                         `news_id` int(11) NOT NULL AUTO_INCREMENT,
-                         `tittle` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
-                         `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
-                         `news_desc` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
-                         `news_source` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-                         `news_date` timestamp(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
-                         `news_kind_id` int(11) NULL DEFAULT NULL,
-                         `view_count` int(11) NULL DEFAULT NULL,
-                         `like_count` int(11) NULL DEFAULT NULL,
-                         `title_img` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-                         PRIMARY KEY (`news_id`) USING BTREE,
-                         INDEX `fk_news_news_2`(`news_kind_id`) USING BTREE,
-                         CONSTRAINT `fk_news_news_2` FOREIGN KEY (`news_kind_id`) REFERENCES `news_kind` (`news_kind_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
--- ----------------------------
--- Table structure for news_kind
--- ----------------------------
-DROP TABLE IF EXISTS `news_kind`;
-CREATE TABLE `news_kind`  (
-                              `news_kind_id` int(11) NOT NULL AUTO_INCREMENT,
-                              `news_kind_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-                              PRIMARY KEY (`news_kind_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+-- -----------------------------------------------------
+-- Table `software`.`news`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `software`.`news` (
+                                                 `news_id` INT NOT NULL AUTO_INCREMENT,
+                                                 `tittle` TEXT CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                                                 `content` TEXT CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                                                 `news_desc` TEXT CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                                                 `news_source` VARCHAR(255) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                                                 `news_date` TIMESTAMP NULL DEFAULT NULL,
+                                                 `news_kind_id` INT NULL DEFAULT NULL,
+                                                 `view_count` INT NULL DEFAULT NULL,
+                                                 `like_count` INT NULL DEFAULT NULL,
+                                                 `title_img` VARCHAR(255) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                                                 `title` VARCHAR(255) NULL DEFAULT NULL,
+                                                 PRIMARY KEY USING BTREE (`news_id`),
+                                                 INDEX `fk_news_news_2` USING BTREE (`news_kind_id`) VISIBLE,
+                                                 CONSTRAINT `fk_news_news_2`
+                                                     FOREIGN KEY (`news_kind_id`)
+                                                         REFERENCES `software`.`news_kind` (`news_kind_id`)
+                                                         ON DELETE RESTRICT
+                                                         ON UPDATE RESTRICT)
+    ENGINE = InnoDB
+    AUTO_INCREMENT = 3
+    DEFAULT CHARACTER SET = utf8
+    ROW_FORMAT = DYNAMIC;
 
--- ----------------------------
--- Table structure for user
--- ----------------------------
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user`  (
-                         `user_id` int(11) NOT NULL AUTO_INCREMENT,
-                         `user_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-                         `user_email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-                         `user_phone` int(11) NULL DEFAULT NULL,
-                         `user_pass` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-                         `user_birth` date NULL DEFAULT NULL,
-                         `user_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-                         `gender_id` int(11) NULL DEFAULT NULL,
-                         PRIMARY KEY (`user_id`) USING BTREE,
-                         INDEX `fk_user_user_1`(`gender_id`) USING BTREE,
-                         CONSTRAINT `fk_user_user_1` FOREIGN KEY (`gender_id`) REFERENCES `gender` (`gender_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
-SET FOREIGN_KEY_CHECKS = 1;
+-- -----------------------------------------------------
+-- Table `software`.`admin_news`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `software`.`admin_news` (
+                                                       `admin_news_id` INT NOT NULL,
+                                                       `admin_id` INT NULL DEFAULT NULL,
+                                                       `news_id` INT NULL DEFAULT NULL,
+                                                       PRIMARY KEY USING BTREE (`admin_news_id`),
+                                                       INDEX `fk_admin_news1` USING BTREE (`admin_id`) VISIBLE,
+                                                       INDEX `fk_admin_news2` USING BTREE (`news_id`) VISIBLE,
+                                                       CONSTRAINT `fk_admin_news1`
+                                                           FOREIGN KEY (`admin_id`)
+                                                               REFERENCES `software`.`admin` (`admin_id`)
+                                                               ON DELETE RESTRICT
+                                                               ON UPDATE RESTRICT,
+                                                       CONSTRAINT `fk_admin_news2`
+                                                           FOREIGN KEY (`news_id`)
+                                                               REFERENCES `software`.`news` (`news_id`)
+                                                               ON DELETE RESTRICT
+                                                               ON UPDATE RESTRICT)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8
+    ROW_FORMAT = DYNAMIC;
+
+
+-- -----------------------------------------------------
+-- Table `software`.`user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `software`.`user` (
+                                                 `user_id` INT NOT NULL AUTO_INCREMENT,
+                                                 `user_name` VARCHAR(255) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                                                 `user_email` VARCHAR(255) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                                                 `user_phone` INT NULL DEFAULT NULL,
+                                                 `user_pass` VARCHAR(11) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                                                 `user_birth` DATE NULL DEFAULT NULL,
+                                                 `user_address` VARCHAR(255) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                                                 `gender_id` INT NULL DEFAULT NULL,
+                                                 `auth_provider` VARCHAR(20) NULL,
+                                                 PRIMARY KEY USING BTREE (`user_id`),
+                                                 INDEX `fk_user_user_1` USING BTREE (`gender_id`) VISIBLE,
+                                                 CONSTRAINT `fk_user_user_1`
+                                                     FOREIGN KEY (`gender_id`)
+                                                         REFERENCES `software`.`gender` (`gender_id`)
+                                                         ON DELETE RESTRICT
+                                                         ON UPDATE RESTRICT)
+    ENGINE = InnoDB
+    AUTO_INCREMENT = 3
+    DEFAULT CHARACTER SET = utf8
+    ROW_FORMAT = DYNAMIC;
+
+
+-- -----------------------------------------------------
+-- Table `software`.`comment`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `software`.`comment` (
+                                                    `comment_id` INT NOT NULL AUTO_INCREMENT,
+                                                    `news_id` INT NULL DEFAULT NULL,
+                                                    `user_id` INT NULL DEFAULT NULL,
+                                                    `comment_content` TEXT CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                                                    `level` INT NULL DEFAULT '1',
+                                                    `parent_id` INT NULL DEFAULT NULL,
+                                                    `comment_conten` VARCHAR(255) NULL DEFAULT NULL,
+                                                    `lever` INT NOT NULL,
+                                                    PRIMARY KEY USING BTREE (`comment_id`),
+                                                    INDEX `fk_comment_comment_2` USING BTREE (`news_id`) VISIBLE,
+                                                    INDEX `fk_comment_comment_3` USING BTREE (`user_id`) VISIBLE,
+                                                    CONSTRAINT `fk_comment_comment_2`
+                                                        FOREIGN KEY (`news_id`)
+                                                            REFERENCES `software`.`news` (`news_id`)
+                                                            ON DELETE RESTRICT
+                                                            ON UPDATE RESTRICT,
+                                                    CONSTRAINT `fk_comment_comment_3`
+                                                        FOREIGN KEY (`user_id`)
+                                                            REFERENCES `software`.`user` (`user_id`)
+                                                            ON DELETE RESTRICT
+                                                            ON UPDATE RESTRICT)
+    ENGINE = InnoDB
+    AUTO_INCREMENT = 4
+    DEFAULT CHARACTER SET = utf8
+    ROW_FORMAT = DYNAMIC;
+
+
+-- -----------------------------------------------------
+-- Table `software`.`hibernate_sequence`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `software`.`hibernate_sequence` (
+    `next_val` BIGINT NULL DEFAULT NULL)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4
+    COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `software`.`history`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `software`.`history` (
+                                                    `history_id` INT NOT NULL,
+                                                    `user_id` INT NULL DEFAULT NULL,
+                                                    `news_id` INT NULL DEFAULT NULL,
+                                                    `like` TINYINT(1) NULL DEFAULT NULL COMMENT '0 là ko like,1 là like',
+                                                    PRIMARY KEY USING BTREE (`history_id`),
+                                                    INDEX `fk_history_user` USING BTREE (`user_id`) VISIBLE,
+                                                    INDEX `fk_history_news` USING BTREE (`news_id`) VISIBLE,
+                                                    CONSTRAINT `fk_history_news`
+                                                        FOREIGN KEY (`news_id`)
+                                                            REFERENCES `software`.`news` (`news_id`)
+                                                            ON DELETE RESTRICT
+                                                            ON UPDATE RESTRICT,
+                                                    CONSTRAINT `fk_history_user`
+                                                        FOREIGN KEY (`user_id`)
+                                                            REFERENCES `software`.`user` (`user_id`)
+                                                            ON DELETE RESTRICT
+                                                            ON UPDATE RESTRICT)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8
+    ROW_FORMAT = DYNAMIC;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

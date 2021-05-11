@@ -4,6 +4,7 @@ import com.example.software.model.News;
 import com.example.software.repository.NewsRepository;
 import com.example.software.services.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,8 @@ public class NewsServiceImpl implements NewsService {
     public List<News> getAllNews() {
         return newsRepository.findAll();
     }
+
+
 
 
 ////

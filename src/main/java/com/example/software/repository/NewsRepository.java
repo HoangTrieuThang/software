@@ -15,13 +15,12 @@ public interface NewsRepository extends JpaRepository<News,Integer> {
     @Override
     List<News> findAll();
 
+//2 cai query nay co van de :((
+    @Query(value = "select * from news order by news_date desc limit 10", nativeQuery = true)
+    List<News> findByNews_date(Timestamp news_date);
 
-//    @Query(value = "select * from news order by news_date desc limit 10", nativeQuery = true)
-//    List<News> findByNews_date(Timestamp news_date);
-//
-//
-//    @Query(value = "select * from news order by view_count desc limit 10", nativeQuery = true)
-//    List<News> findByView_count(int view_count);
+    @Query(value = "select * from news order by view_count desc limit 10", nativeQuery = true)
+    List<News> findByView_count(int view_count);
 
     @Override
     Optional<News> findById(Integer integer);

@@ -24,6 +24,11 @@ public class User {
     private int user_phone;
     private String user_address;
     private Date user_birth;
+    private boolean enable;
+    @Enumerated(EnumType.STRING)
+    private AuthenticationProvider auth_provider;
+
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "gender_id", nullable = false)
