@@ -25,7 +25,7 @@ public class User {
     private String user_address;
     private Date user_birth;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "gender_id", nullable = false)
     private Gender gender;
 

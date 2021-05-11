@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,49 +36,38 @@ public class NewsController {
         return null;
     }
 
-    @GetMapping("date")
-    public List<News> getNewsByDate(@PathVariable("news_date")Timestamp news_date){
-        List<News> newsList = newsRepository.findByNews_date(news_date);
-        return newsList;
-    }
 
-    @GetMapping("views")
-    public List<News> getNewsByViews(@PathVariable("view_count")int view_count){
-        List<News> newsViews = newsRepository.findByView_count(view_count);
-        return newsViews;
-    }
+//list bai viet moi nhat
+//    @GetMapping("/date")
+//    public List<News> getNewsByDate(@RequestParam(value = "news_date")
+//                                        @DateTimeFormat(pattern = "dd.MM.yyyy")Timestamp news_date){
+//        List<News> newsList = newsRepository.findByNews_date(news_date);
+//        return newsList;
+//    }
 
+
+// list bai viet nheu luot xem nhat
+//    @GetMapping("views")
+//    public List<News> getNewsByViews(@PathVariable("view_count")int view_count){
+//        List<News> newsViews = newsRepository.findByView_count(view_count);
+//        return newsViews;
+//    }
+// find by id
     @GetMapping("{id}")
     public Optional<News> getNewsById(@PathVariable("id") Integer integer){
         Optional<News> getNewsById = newsRepository.findById(integer);
-        return getNewsById;
+        return  getNewsById;
     }
 
-    @GetMapping("/search/{keyword}")
-    public List<News> searchNewsByKeyWord(@PathVariable("keyword") String keyword){
-        List<News> searchNews= newsRepository.findByContent(keyword);
+
+    @GetMapping("/search/{title}")
+    public List<News> searchNewsByKeyWord(@PathVariable("title") String keyword){
+        List<News> searchNews= newsRepository.findNewsByTitle(keyword);
         return searchNews;
     }
 
 
 
 
-//    @GetMapping("api/list")
-//    public Iterable<News> getListNews(){
-//        return newsRepository.findAll();
-//    }
-//
-//    @GetMapping("api/list/{name}")
-//    public Optional<News> getListOfLatestArticles(@PathVariable(value = "id") Integer id){
-//        Optional<News> newsSearch = newsRepository.findById(id);
-//        return newsSearch;
-//
-//    }
-
-//    @GetMapping("api/search/{content}")
-//    public Iterable<News> getNewsByContent(@PathVariable(value = "content") Text content){
-//        Iterable<News> newsSearch = newsRepository.findNewsByContent(content);
-//        return  newsSearch;
-//    }
 
 }

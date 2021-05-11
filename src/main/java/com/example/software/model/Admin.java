@@ -30,11 +30,11 @@ public class Admin {
     private String admin_desc;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="gender_id")
     private Gender gender;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="admin_role_id")
     private AdminRole adminRole;
 

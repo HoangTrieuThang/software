@@ -11,7 +11,6 @@ public interface NewsKindRepository extends JpaRepository<NewsKind, Integer> {
     @Override
     List<NewsKind> findAll();
 
-     List<NewsKind> findByNews_kindAndNews_kind_name(int news_kind, String news_kind_name);
-
-
+//    List<NewsKind> findNewsKindByNews_kindAndNews_kind_name( final int news_kind, final String news_kind_name);
+    
 }

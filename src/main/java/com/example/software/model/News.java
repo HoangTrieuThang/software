@@ -29,7 +29,7 @@ public class News {
     private int like_count;
     private String title_img;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="news_kind_id", nullable=false)
     private NewsKind newsKind;
 

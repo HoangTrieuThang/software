@@ -20,18 +20,18 @@ public class NewsKindController {
         return newsKindRepository.findAll();
     }
 
-    @GetMapping("{id}")
-    public List<NewsKind> getNewsKindByIdAndName(@PathVariable int news_kind, String news_kind_name){
-        List<NewsKind> newsKindList = newsKindRepository.findByNews_kindAndNews_kind_name(news_kind,news_kind_name);
-        return newsKindList;
-    }
-
-
-//cua admin
-    @PostMapping("/save")
-    public String saveNewsKind(@RequestBody NewsKind newsKind){
-        newsKindRepository.save(newsKind);
-        return "save success...";
-    }
+//    @GetMapping("{id}")
+//    public List<NewsKind> getNewsKindByIdAndName(@PathVariable int news_kind, String news_kind_name){
+//        List<NewsKind> newsKindList = newsKindRepository.findNewsKindByNews_kindAndNews_kind_name(news_kind,news_kind_name);
+//        return newsKindList;
+//    }
+//
+//
+////cua admin
+//    @PostMapping("/save")
+//    public String saveNewsKind(@RequestBody NewsKind newsKind){
+//        newsKindRepository.save(newsKind);
+//        return "save success...";
+//    }
 
 }
