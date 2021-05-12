@@ -25,8 +25,8 @@ public class User {
     private String user_address;
     private Date user_birth;
     private boolean enable;
-    @Enumerated(EnumType.STRING)
-    private AuthenticationProvider auth_provider;
+//    @Enumerated(EnumType.STRING)
+//    private AuthenticationProvider auth_provider;
 
 
 
