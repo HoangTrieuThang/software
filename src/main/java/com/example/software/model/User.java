@@ -8,37 +8,39 @@ import java.util.Collection;
 
 @Entity
 @Data
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 @Table(name = "user")
 public class User {
     @Id
     @GeneratedValue
-    private int user_id;
-    private String user_name;
-    private String user_email;
-    private String user_pass;
-    private int user_phone;
-    private String user_address;
-    private Date user_birth;
+    @Column(name="user_id")
+    private int userId;
+    @Column(name="user_name")
+    private String userName;
+    @Column(name="user_email")
+    private String userEmail;
+    @Column(name="user_pass")
+    private String userPass;
+    @Column(name="user_phone")
+    private int userPhone;
+    @Column(name="user_address")
+    private String userAddress;
+    @Column(name="user_birth")
+    private Date userBirth;
+    @Column(name="enable")
     private boolean enable;
+
     @Enumerated(EnumType.STRING)
     private AuthenticationProvider auth_provider;
-
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "gender_id", nullable = false)
     private Gender gender;
 
-    @OneToMany(mappedBy = "user")
-    private Collection<Comment> comments;
-
-    @OneToMany(mappedBy = "user")
-    private Collection<History> histories;
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    private Collection<Comment> comments;
+//
+//    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+//    private Collection<History> histories;
 
 
 }

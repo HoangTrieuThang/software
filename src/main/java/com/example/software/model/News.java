@@ -18,28 +18,35 @@ import java.util.Date;
 @Table(name = "news")
 public class News {
     @Id
-    @GeneratedValue
-    private int news_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="news_id")
+    private int newsId;
+    @Column(name="title")
     private String title;
+    @Column(name="content")
     private String content;
-    private String news_desc;
-    private String news_source;
-    private Timestamp news_date;
-    private int view_count;
-    private int like_count;
-    private String title_img;
+    @Column(name="news_desc")
+    private String newsDesc;
+    @Column(name="news_source")
+    private String newsSource;
+    @Column(name="news_date")
+    private Date newsDate;
+    @Column(name="like_count")
+    private int likeCount;
+    @Column(name="title_img")
+    private String titleImg;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="news_kind_id", nullable=false)
     private NewsKind newsKind;
 
-    @OneToMany(mappedBy = "news")
-    private Collection<AdminNews> adminNews;
+//    @OneToMany(mappedBy = "news")
+//    private Collection<AdminNews> adminNews;
 
-    @OneToMany(mappedBy = "news")
-    private Collection<History> histories;
+//    @OneToMany(mappedBy = "news")
+//    private Collection<History> histories;
 
-    @OneToMany(mappedBy = "news")
-    private Collection<Comment> comments;
+//    @OneToMany(mappedBy = "news")
+//    private Collection<Comment> comments;
 
 }

@@ -1,30 +1,25 @@
 package com.example.software.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Data
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
-@Table(name = "history")
-public class History {
+@Table(name="history")
+public class History implements Serializable {
     @Id
-    @GeneratedValue
-    private int history_id;
-    @Column(nullable = false, columnDefinition = "TINYINT", length = 1)
-    private boolean like;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "history_id")
+    private Integer historyId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "like_number")
+    private Integer likeNumber;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "news_id")
-    private News news;
+    @Column(name="user_id")
+    private Integer userId;
 }

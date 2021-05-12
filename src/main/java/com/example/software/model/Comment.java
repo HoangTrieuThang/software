@@ -17,10 +17,14 @@ import java.util.Collection;
 public class Comment {
     @Id
     @GeneratedValue
-    private int comment_id;
-    private String comment_conten;
+    @Column(name="comment_id")
+    private int commentId;
+    @Column(name="comment_content")
+    private String commentContent;
+    @Column(name="lever")
     private int lever;
-    private int parent_id;
+    @Column(name="parent_id")
+    private int parentId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

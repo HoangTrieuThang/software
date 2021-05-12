@@ -27,15 +27,4 @@ public class NewsServiceImpl implements NewsService {
     public List<News> getAllNews() {
         return newsRepository.findAll();
     }
-
-
-
-
-////
-////    @Override
-////    public List<News> getNewsByDate() {
-////        return null;
-////    }
-
-
 }

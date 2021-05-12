@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    @Query("SELECT u FROM User u WHERE u.user_name = :username")
+    @Query("FROM User u WHERE u.userName = :username")
     public User getUserByUsername(@Param("username") String username);
 }

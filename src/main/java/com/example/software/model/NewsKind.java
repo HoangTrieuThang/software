@@ -16,10 +16,12 @@ import java.util.Collection;
 public class NewsKind {
     @Id
     @GeneratedValue
-    private int news_kind;
-    private String news_kind_name;
+    @Column(name="news_kind")
+    private int newsKind;
+    @Column(name="news_kind_name")
+    private String newsKindName;
 
-    @OneToMany(mappedBy="newsKind")
-    private Collection<News> news;
+//    @OneToMany(mappedBy="newsKind")
+//    private Collection<News> news;
 
 }

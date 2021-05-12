@@ -12,18 +12,14 @@ import java.util.Optional;
 
 public interface NewsRepository extends JpaRepository<News,Integer> {
 
-    @Override
-    List<News> findAll();
+    @Query(value = "select * from news order by news_date desc limit 3", nativeQuery = true)
+    List<News> findTopNewsDate();
 
-//2 cai query nay co van de :((
-    @Query(value = "select * from news order by news_date desc limit 10", nativeQuery = true)
-    List<News> findByNews_date(Timestamp news_date);
+    @Query(value = "select * from news order by like_count desc limit 10", nativeQuery = true)
+    List<News> findTopNews();
 
-    @Query(value = "select * from news order by view_count desc limit 10", nativeQuery = true)
-    List<News> findByView_count(int view_count);
+    News findByNewsId(Integer id);
 
-    @Override
-    Optional<News> findById(Integer integer);
-
-    List<News> findNewsByTitle(String keyword);
+    @Query(value = "select * from news where title LIKE %:title%", nativeQuery = true)
+    List<News> findByTitle(String title);
 }

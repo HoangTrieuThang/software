@@ -15,7 +15,8 @@ import javax.persistence.*;
 public class AdminNews {
     @Id
     @GeneratedValue
-    private int admin_news_id;
+    @Column(name = "admin_news_id")
+    private Integer adminNewsId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "admin_id", nullable = false)

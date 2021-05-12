@@ -18,16 +18,26 @@ import java.util.Collection;
 public class Admin {
     @Id
     @GeneratedValue
-    private int admin_id;
-    private int admin_salary;
-    private int admin_age;
-    private int employee_group;
-    private String admin_name;
-    private String admin_email;
-    private String admin_address;
-    private String admin_country;
+    @Column(name = "admin_id")
+    private Integer adminId;
+    @Column(name = "admin_salary")
+    private Integer adminSalary;
+    @Column(name = "admin_age")
+    private Integer adminAge;
+    @Column(name = "employee_group")
+    private Integer employeeGroup;
+    @Column(name = "admin_name")
+    private String adminName;
+    @Column(name = "admin_email")
+    private String adminEmail;
+    @Column(name = "admin_address")
+    private String adminAddress;
+    @Column(name = "admin_country")
+    private String adminCountry;
+    @Column(name = "knowledge")
     private String knowledge;
-    private String admin_desc;
+    @Column(name = "admin_desc")
+    private String adminDesc;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -39,6 +49,6 @@ public class Admin {
     private AdminRole adminRole;
 
 
-    @OneToMany(mappedBy = "admin")
-    private Collection<AdminNews> adminNews;
+//    @OneToMany(mappedBy = "admin")
+//    private Collection<AdminNews> adminNews;
 }

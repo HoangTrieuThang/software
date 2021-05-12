@@ -16,8 +16,10 @@ import java.util.Collection;
 public class Gender {
     @Id
     @GeneratedValue
-    private int gender_id;
-    private String gender_name;
+    @Column(name="gender_id")
+    private int genderId;
+    @Column(name="gender_name")
+    private String genderName;
 
     @OneToMany(mappedBy = "gender")
     private Collection<User> users;

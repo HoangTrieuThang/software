@@ -18,7 +18,8 @@ import java.util.List;
 public class AdminRole {
     @Id
     @GeneratedValue
-    private int admin_role_id;
+    @Column(name = "admin_role_id")
+    private Integer adminRoleId;
 
     @OneToMany(mappedBy="adminRole",cascade = CascadeType.ALL)
     private List<Admin> admins = new ArrayList<>();
