@@ -2,6 +2,7 @@ package com.example.software.controller.usercontroller;
 
 import com.example.software.model.NewsKind;
 import com.example.software.repository.NewsKindRepository;
+import com.example.software.services.NewsKindService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,9 +16,19 @@ public class NewsKindController {
     @Autowired
     private NewsKindRepository newsKindRepository;
 
+    @Autowired
+    private NewsKindService newsKindService;
+
     @GetMapping("/list")
     public List<NewsKind> getListNewsKind() {
         return newsKindRepository.findAll();
+    }
+
+    // find by id
+    @GetMapping("{id}")
+    public NewsKind getNewsByNewsKindId(@PathVariable("id") Integer id){
+        NewsKind NewsKind = newsKindService.findNewsByNewKindId(id);
+        return  NewsKind;
     }
 
 //    @GetMapping("{id}")

@@ -1,5 +1,6 @@
 package com.example.software.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.w3c.dom.Text;
 
@@ -38,6 +39,7 @@ public class News {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="news_kind_id", nullable=false)
+    @JsonIgnore
     private NewsKind newsKind;
 
 //    @OneToMany(mappedBy = "news")
