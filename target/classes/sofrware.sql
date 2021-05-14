@@ -7,6 +7,11 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
 -- -----------------------------------------------------
 -- Schema software
 -- -----------------------------------------------------
@@ -15,7 +20,17 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema software
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `software` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
-USE `software` ;
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`role`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`role` (
+                                             `id` INT NOT NULL,
+                                             `name` VARCHAR(45) NOT NULL,
+                                             PRIMARY KEY (`id`))
+    ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
 -- Table `software`.`gender`
@@ -26,9 +41,60 @@ CREATE TABLE IF NOT EXISTS `software`.`gender` (
                                                    PRIMARY KEY USING BTREE (`gender_id`))
     ENGINE = InnoDB
     AUTO_INCREMENT = 4
-    DEFAULT CHARACTER SET = utf8
+    DEFAULT CHARACTER SET = utf8mb3
     ROW_FORMAT = DYNAMIC;
 
+
+-- -----------------------------------------------------
+-- Table `software`.`user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `software`.`user` (
+                                                 `user_id` INT NOT NULL AUTO_INCREMENT,
+                                                 `user_name` VARCHAR(255) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                                                 `user_email` VARCHAR(255) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                                                 `user_phone` INT NULL DEFAULT NULL,
+                                                 `user_pass` VARCHAR(45) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                                                 `user_birth` DATE NULL DEFAULT NULL,
+                                                 `user_address` VARCHAR(255) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                                                 `gender_id` INT NULL DEFAULT NULL,
+                                                 `roles` VARCHAR(20) NULL DEFAULT NULL,
+                                                 `auth_provider` VARCHAR(255) NULL DEFAULT NULL,
+                                                 `enable` BIT(1) NULL DEFAULT NULL,
+                                                 PRIMARY KEY USING BTREE (`user_id`),
+                                                 INDEX `fk_user_user_1` USING BTREE (`gender_id`) VISIBLE,
+                                                 CONSTRAINT `fk_user_user_1`
+                                                     FOREIGN KEY (`gender_id`)
+                                                         REFERENCES `software`.`gender` (`gender_id`)
+                                                         ON DELETE RESTRICT
+                                                         ON UPDATE RESTRICT)
+    ENGINE = InnoDB
+    AUTO_INCREMENT = 3
+    DEFAULT CHARACTER SET = utf8mb3
+    ROW_FORMAT = DYNAMIC;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`users_roles`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`users_roles` (
+                                                    `role_id` INT NOT NULL,
+                                                    `user_user_id` INT NOT NULL,
+                                                    PRIMARY KEY (`role_id`, `user_user_id`),
+                                                    INDEX `fk_role_has_user_user1_idx` (`user_user_id` ASC) VISIBLE,
+                                                    INDEX `fk_role_has_user_role_idx` (`role_id` ASC) VISIBLE,
+                                                    CONSTRAINT `fk_role_has_user_role`
+                                                        FOREIGN KEY (`role_id`)
+                                                            REFERENCES `mydb`.`role` (`id`)
+                                                            ON DELETE NO ACTION
+                                                            ON UPDATE NO ACTION,
+                                                    CONSTRAINT `fk_role_has_user_user1`
+                                                        FOREIGN KEY (`user_user_id`)
+                                                            REFERENCES `software`.`user` (`user_id`)
+                                                            ON DELETE NO ACTION
+                                                            ON UPDATE NO ACTION)
+    ENGINE = InnoDB;
+
+USE `software` ;
 
 -- -----------------------------------------------------
 -- Table `software`.`admin_role`
@@ -39,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `software`.`admin_role` (
                                                        PRIMARY KEY USING BTREE (`admin_role_id`))
     ENGINE = InnoDB
     AUTO_INCREMENT = 4
-    DEFAULT CHARACTER SET = utf8
+    DEFAULT CHARACTER SET = utf8mb3
     ROW_FORMAT = DYNAMIC;
 
 
@@ -75,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `software`.`admin` (
                                                           ON UPDATE RESTRICT)
     ENGINE = InnoDB
     AUTO_INCREMENT = 3
-    DEFAULT CHARACTER SET = utf8
+    DEFAULT CHARACTER SET = utf8mb3
     ROW_FORMAT = DYNAMIC;
 
 
@@ -89,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `software`.`news_kind` (
                                                       PRIMARY KEY USING BTREE (`news_kind_id`))
     ENGINE = InnoDB
     AUTO_INCREMENT = 3
-    DEFAULT CHARACTER SET = utf8
+    DEFAULT CHARACTER SET = utf8mb3
     ROW_FORMAT = DYNAMIC;
 
 
@@ -117,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `software`.`news` (
                                                          ON UPDATE RESTRICT)
     ENGINE = InnoDB
     AUTO_INCREMENT = 3
-    DEFAULT CHARACTER SET = utf8
+    DEFAULT CHARACTER SET = utf8mb3
     ROW_FORMAT = DYNAMIC;
 
 
@@ -142,33 +208,7 @@ CREATE TABLE IF NOT EXISTS `software`.`admin_news` (
                                                                ON DELETE RESTRICT
                                                                ON UPDATE RESTRICT)
     ENGINE = InnoDB
-    DEFAULT CHARACTER SET = utf8
-    ROW_FORMAT = DYNAMIC;
-
-
--- -----------------------------------------------------
--- Table `software`.`user`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `software`.`user` (
-                                                 `user_id` INT NOT NULL AUTO_INCREMENT,
-                                                 `user_name` VARCHAR(255) CHARACTER SET 'utf8' NULL DEFAULT NULL,
-                                                 `user_email` VARCHAR(255) CHARACTER SET 'utf8' NULL DEFAULT NULL,
-                                                 `user_phone` INT NULL DEFAULT NULL,
-                                                 `user_pass` VARCHAR(11) CHARACTER SET 'utf8' NULL DEFAULT NULL,
-                                                 `user_birth` DATE NULL DEFAULT NULL,
-                                                 `user_address` VARCHAR(255) CHARACTER SET 'utf8' NULL DEFAULT NULL,
-                                                 `gender_id` INT NULL DEFAULT NULL,
-                                                 `auth_provider` VARCHAR(20) NULL,
-                                                 PRIMARY KEY USING BTREE (`user_id`),
-                                                 INDEX `fk_user_user_1` USING BTREE (`gender_id`) VISIBLE,
-                                                 CONSTRAINT `fk_user_user_1`
-                                                     FOREIGN KEY (`gender_id`)
-                                                         REFERENCES `software`.`gender` (`gender_id`)
-                                                         ON DELETE RESTRICT
-                                                         ON UPDATE RESTRICT)
-    ENGINE = InnoDB
-    AUTO_INCREMENT = 3
-    DEFAULT CHARACTER SET = utf8
+    DEFAULT CHARACTER SET = utf8mb3
     ROW_FORMAT = DYNAMIC;
 
 
@@ -199,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `software`.`comment` (
                                                             ON UPDATE RESTRICT)
     ENGINE = InnoDB
     AUTO_INCREMENT = 4
-    DEFAULT CHARACTER SET = utf8
+    DEFAULT CHARACTER SET = utf8mb3
     ROW_FORMAT = DYNAMIC;
 
 
@@ -221,6 +261,7 @@ CREATE TABLE IF NOT EXISTS `software`.`history` (
                                                     `user_id` INT NULL DEFAULT NULL,
                                                     `news_id` INT NULL DEFAULT NULL,
                                                     `like` TINYINT(1) NULL DEFAULT NULL COMMENT '0 là ko like,1 là like',
+                                                    `like_number` INT NULL DEFAULT NULL,
                                                     PRIMARY KEY USING BTREE (`history_id`),
                                                     INDEX `fk_history_user` USING BTREE (`user_id`) VISIBLE,
                                                     INDEX `fk_history_news` USING BTREE (`news_id`) VISIBLE,
@@ -235,7 +276,7 @@ CREATE TABLE IF NOT EXISTS `software`.`history` (
                                                             ON DELETE RESTRICT
                                                             ON UPDATE RESTRICT)
     ENGINE = InnoDB
-    DEFAULT CHARACTER SET = utf8
+    DEFAULT CHARACTER SET = utf8mb3
     ROW_FORMAT = DYNAMIC;
 
 

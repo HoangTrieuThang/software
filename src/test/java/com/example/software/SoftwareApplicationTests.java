@@ -1,5 +1,6 @@
 package com.example.software;
 
+import com.example.software.model.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -9,7 +10,5 @@ import static org.springframework.test.util.AssertionErrors.assertNull;
 
 @SpringBootTest
 class SoftwareApplicationTests {
-
-
 
 }
