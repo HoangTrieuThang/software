@@ -21,7 +21,7 @@ public class NewsKind {
     @Column(name="news_kind_name")
     private String newsKindName;
 
-    @OneToMany(mappedBy="newsKind",fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="newsKind",fetch=FetchType.LAZY,cascade = {CascadeType.ALL,CascadeType.PERSIST})
     private Collection<News> news;
 
 }

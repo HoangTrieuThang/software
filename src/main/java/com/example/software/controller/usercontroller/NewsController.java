@@ -29,12 +29,10 @@ public class NewsController {
 
     @GetMapping(value = "/getAlls",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<News>> getAllNews() {
-        System.out.println("Aaaaaa");
         List<News> newsList = newsService.getAllNews();
         return new ResponseEntity<>(newsList,HttpStatus.OK);
     }
 
-// 2 cai tim theo bai viet moi nhat va nhieu luot xem nhat bi loi 400
 //list bai viet moi nhat
         @GetMapping(value="/date" , produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<News>> getNewsByDate(){
