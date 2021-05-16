@@ -6,9 +6,7 @@ import com.example.software.services.NewsKindService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,7 +42,6 @@ public class NewsKindController {
         newsKindService.delete(id);
         return ResponseEntity.status(200).body(null);
     }
-
     @GetMapping("/getPage")
     public ResponseEntity<Page<NewsKind>> getAll(@RequestParam Optional<Integer> pageIndex,@RequestParam Optional<Integer> pageSize,@RequestParam Optional<String> newsKindName) {
         Page<NewsKind> newsKinds = newsKindService.listNewsKind( PageRequest.of(pageIndex.orElse(0),pageSize.orElse(10),Sort.by(Sort.Direction.ASC,"news_kind_id")),newsKindName.orElse("_"));
