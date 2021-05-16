@@ -41,14 +41,4 @@ public class News {
     @JoinColumn(name="news_kind_id", nullable=false)
     @JsonIgnore
     private NewsKind newsKind;
-
-//    @OneToMany(mappedBy = "news")
-//    private Collection<AdminNews> adminNews;
-
-//    @OneToMany(mappedBy = "news")
-//    private Collection<History> histories;
-
-//    @OneToMany(mappedBy = "news")
-//    private Collection<Comment> comments;
-
-}
+    }

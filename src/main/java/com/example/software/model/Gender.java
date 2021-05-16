@@ -24,6 +24,4 @@ public class Gender {
     @OneToMany(mappedBy = "gender")
     private Collection<User> users;
 
-    @OneToMany(mappedBy="gender")
-    private Collection<Admin> admins;
 }

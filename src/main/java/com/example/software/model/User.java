@@ -36,11 +36,5 @@ public class User {
     @JoinColumn(name = "gender_id", nullable = false)
     private Gender gender;
 
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-//    private Collection<Comment> comments;
-//
-//    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-//    private Collection<History> histories;
-
 
 }
