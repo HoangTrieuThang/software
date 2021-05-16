@@ -24,7 +24,15 @@ public class AuthAdminController {
     }
     return ResponseEntity.status(202).body(null);
 }
-
+    @PostMapping("/register")
+    public ResponseEntity<Admin> register(@RequestBody Admin registerAdmin) {
+        Admin admin =adminService.register(registerAdmin);
+        if(admin != null){
+            admin.setPassword("");
+            return ResponseEntity.status(200).body(admin);
+        }
+        return ResponseEntity.status(202).body(null);
+    }
 
 
 
