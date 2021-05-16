@@ -7,15 +7,11 @@ import java.util.Collection;
 
 @Entity
 @Data
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @ToString
 @Table(name = "news_kind")
 public class NewsKind {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="news_kind_id")
     private int newsKindId;
     @Column(name="news_kind_name")
