@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class WebController {
+    //http://localhost:8080/login/oauth2/code/google
+    //link login
 
     @GetMapping(value = {"/", "/home"})
     public String homepage() {

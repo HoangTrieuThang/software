@@ -30,16 +30,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+//        http
+//                .authorizeRequests()
+//                .antMatchers("/", "/home").permitAll() // Cho phép tất cả mọi người truy cập vào 2 địa chỉ này
+//                .anyRequest().authenticated() // Tất cả các request khác đều cần phải xác thực mới được truy cập
+//                .and()
+//                .formLogin() // Cho phép người dùng xác thực bằng form login
+//                .defaultSuccessUrl("/hello")
+//                .permitAll() // Tất cả đều được truy cập vào địa chỉ này
+//                .and()
+//                .logout() // Cho phép logout
+//                .permitAll();
+        http.antMatcher("/**")
                 .authorizeRequests()
-                .antMatchers("/", "/home").permitAll() // Cho phép tất cả mọi người truy cập vào 2 địa chỉ này
-                .anyRequest().authenticated() // Tất cả các request khác đều cần phải xác thực mới được truy cập
+                .antMatchers("/")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
                 .and()
-                .formLogin() // Cho phép người dùng xác thực bằng form login
-                .defaultSuccessUrl("/hello")
-                .permitAll() // Tất cả đều được truy cập vào địa chỉ này
-                .and()
-                .logout() // Cho phép logout
-                .permitAll();
+                .oauth2Login();
     }
 }
