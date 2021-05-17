@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -32,15 +33,20 @@ public class NewKindServiceImpl implements NewsKindService {
     }
 
     @Override
+    @Transactional
     public NewsKind update(Integer id, NewsKind newsKind) throws Exception {
         Optional<NewsKind> optional = newsKindRepository.findById(id);
         if (optional.isEmpty()) {
             throw new Exception("abc");
         }
-        return newsKindRepository.save(newsKind);
+        NewsKind newsKind1 = optional.get();
+        newsKind1.setNews(newsKind.getNews());
+        newsKind1.setNewsKindName(newsKind.getNewsKindName());
+        return newsKindRepository.save(newsKind1);
     }
 
     @Override
+    @Transactional
     public void delete(Integer id) {
         newsKindRepository.deleteByNewsKindId(id);
     }
