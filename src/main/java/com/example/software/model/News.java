@@ -10,12 +10,6 @@ import java.util.Collection;
 import java.util.Date;
 
 @Entity
-@Data
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 @Table(name = "news")
 public class News {
     @Id
@@ -37,8 +31,96 @@ public class News {
     @Column(name="title_img")
     private String titleImg;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="news_kind_id", nullable=false)
     @JsonIgnore
     private NewsKind newsKind;
+
+    public News(int newsId, String title, String content, String newsDesc, String newsSource, Date newsDate, int likeCount, String titleImg, NewsKind newsKind) {
+        this.newsId = newsId;
+        this.title = title;
+        this.content = content;
+        this.newsDesc = newsDesc;
+        this.newsSource = newsSource;
+        this.newsDate = newsDate;
+        this.likeCount = likeCount;
+        this.titleImg = titleImg;
+        this.newsKind = newsKind;
     }
+
+    public News() {
+    }
+
+    public int getNewsId() {
+        return newsId;
+    }
+
+    public void setNewsId(int newsId) {
+        this.newsId = newsId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getNewsDesc() {
+        return newsDesc;
+    }
+
+    public void setNewsDesc(String newsDesc) {
+        this.newsDesc = newsDesc;
+    }
+
+    public String getNewsSource() {
+        return newsSource;
+    }
+
+    public void setNewsSource(String newsSource) {
+        this.newsSource = newsSource;
+    }
+
+    public Date getNewsDate() {
+        return newsDate;
+    }
+
+    public void setNewsDate(Date newsDate) {
+        this.newsDate = newsDate;
+    }
+
+    public int getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public String getTitleImg() {
+        return titleImg;
+    }
+
+    public void setTitleImg(String titleImg) {
+        this.titleImg = titleImg;
+    }
+
+    public NewsKind getNewsKind() {
+        return newsKind;
+    }
+
+    public void setNewsKind(NewsKind newsKind) {
+        this.newsKind = newsKind;
+    }
+}

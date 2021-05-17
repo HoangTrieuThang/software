@@ -24,11 +24,13 @@ public class NewsKind {
         this.news = news;
     }
 
-    public NewsKind() {
-    }
+
 
     public int getNewsKindId() {
         return newsKindId;
+    }
+
+    public NewsKind() {
     }
 
     public void setNewsKindId(int newsKindId) {

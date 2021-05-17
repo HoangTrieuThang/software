@@ -20,4 +20,5 @@ public interface NewsRepository extends JpaRepository<News,Integer> {
 
     @Query(value = "select * from news where title LIKE %:title%", nativeQuery = true)
     List<News> findByTitle(String title);
+    void deleteByNewsId(Integer id);
 }
