@@ -1,4 +1,4 @@
-package com.example.software.services;
+package com.example.software.services.impl;
 
 import com.example.software.model.News;
 import com.example.software.model.NewsKind;

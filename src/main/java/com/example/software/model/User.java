@@ -29,9 +29,6 @@ public class User {
     @Column(name="enable")
     private boolean enable;
 
-    @Enumerated(EnumType.STRING)
-    private AuthenticationProvider auth_provider;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "gender_id", nullable = false)
     private Gender gender;
