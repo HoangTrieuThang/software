@@ -1,34 +1,22 @@
-package com.example.software.services;
+package com.example.software.services.impl;
 
 import com.example.software.model.News;
 import com.example.software.model.NewsKind;
-import com.example.software.repository.NewsRepository;
-import com.example.software.services.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.transaction.Transactional;
 import java.util.List;
-
-@Transactional
 @Service
-@Repository
-public class NewsServiceImpl implements NewsService {
+public class NewsService implements com.example.software.services.NewsService {
+
     @Autowired
-    private NewsRepository newsRepository;
 
-    @PersistenceContext
-    private EntityManager em;
 
+    @Override
     public List<News> getAllNews() {
-        return newsRepository.findAll();
+        return null;
     }
 
     @Override
