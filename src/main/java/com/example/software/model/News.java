@@ -30,11 +30,21 @@ public class News {
     private int likeCount;
     @Column(name="title_img")
     private String titleImg;
+    @Column(name="news_kind_id")
+    private Integer newsKindId;
 
+    public Integer getNewsKindId() {
+        return newsKindId;
+    }
+
+    public void setNewsKindId(Integer newsKindId) {
+        this.newsKindId = newsKindId;
+    }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="news_kind_id", nullable=false)
+    @JoinColumn(name="news_kind_id", referencedColumnName = "news_kind_id", insertable = false, updatable = false, foreignKey = @javax.persistence.ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
     @JsonIgnore
+
     private NewsKind newsKind;
 
     public News(int newsId, String title, String content, String newsDesc, String newsSource, Date newsDate, int likeCount, String titleImg, NewsKind newsKind) {
@@ -123,4 +133,5 @@ public class News {
     public void setNewsKind(NewsKind newsKind) {
         this.newsKind = newsKind;
     }
+
 }

@@ -14,6 +14,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -41,12 +42,13 @@ public class NewsController {
     }
 
 
-    @PostMapping("/create")
-    public ResponseEntity<News> createNews(
+    @RequestMapping(value="/create",method = RequestMethod.POST,consumes = {"multipart/form-data"})
+    public ResponseEntity<News> createNews(@RequestParam("file") MultipartFile file,
                                            @RequestParam("title") String title,
+                                           @RequestParam("newsDesc") String newsDesc,
                                            @RequestParam("content") String content,
-                                               @RequestParam("newsKindId") Integer newsKindId,
-                                               @RequestParam("file") MultipartFile file){
+                                           @RequestParam("newsKindId") Integer newsKindId
+    ){
 
         NewsKind newsKind = newsKindService.findNewsByNewKindId(newsKindId);
         if(newsKind !=null) {
@@ -55,10 +57,11 @@ public class NewsController {
             news.setContent(content);
             news.setNewsKind(newsKind);
             news.setNewsDate(new Date());
+            news.setNewsDesc(newsDesc);
             news.setLikeCount(0);
             news.setNewsDesc("test");
-        News news1 = newsService.create(news,file);
-        return ResponseEntity.status(200).body(news1);
+            News news1 = newsService.create(news,file);
+            return ResponseEntity.status(200).body(news1);
         }
         return null;
     }
@@ -66,6 +69,7 @@ public class NewsController {
     @PostMapping("/update/{id}")
     public ResponseEntity<News> updateNews(@PathVariable Integer id,@RequestParam("title") String title,
                                            @RequestParam("content") String content,
+                                           @RequestParam("newsDesc") String newsDesc,
                                            @RequestParam("newsKindId") Integer newsKindId,
                                            @RequestParam("file") MultipartFile file) throws Exception {
         NewsKind newsKind = newsKindService.findNewsByNewKindId(newsKindId);
@@ -74,6 +78,7 @@ public class NewsController {
             news.setTitle(title);
             news.setContent(content);
             news.setNewsKind(newsKind);
+            news.setNewsDesc(newsDesc);
             news.setNewsDate(new Date());
             news.setLikeCount(0);
             news.setNewsDesc("test");

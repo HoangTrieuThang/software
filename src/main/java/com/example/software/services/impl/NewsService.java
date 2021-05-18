@@ -8,6 +8,7 @@ import com.example.software.dto.NewsCreateRequest;
 import com.example.software.model.News;
 import com.example.software.model.NewsKind;
 import com.example.software.repository.NewsRepository;
+import com.example.software.services.NewsKindService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,6 +26,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +34,9 @@ import java.util.Optional;
 public class NewsService implements com.example.software.services.NewsService {
 @Autowired
 private NewsRepository newsRepository;
+
+@Autowired
+private NewsKindService newsKindService;
 
     @Override
     public List<News> getAllNews() {
@@ -99,6 +105,7 @@ private NewsRepository newsRepository;
             news1.setTitleImg("/api/admin/news/downloadFile/"+fileName);
         news1.setTitle(news.getTitle());
         news1.setContent(news.getContent());
+        news1.setNewsDesc(news.getNewsDesc());
         news1.setNewsKind(news.getNewsKind());
         return newsRepository.save(news1);
     }
