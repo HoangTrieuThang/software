@@ -24,5 +24,16 @@ public class UserService implements UserDetailsService {
     }
 
 
+//    public void processOAuthPostLogin(String username) {
+//        User existUser = userRepository.getUserByUsername(username);
+//
+//        if (existUser == null) {
+//            User newUser = new User();
+//            newUser.setUserName(username);
+//            newUser.setEnable(true);
+//            userRepository.save(newUser);
+//        }
+//
+//    }
 }
 

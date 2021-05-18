@@ -9,14 +9,14 @@ public class WebController {
     //http://localhost:8080/login/oauth2/code/google
     //link login
 
-    @GetMapping(value = {"/", "/home"})
+    @GetMapping("/")
     public String homepage() {
         return "home";
     }
 
-    @GetMapping("/hello")
+    @GetMapping("/welcome")
     public String hello() {
-        return "hello";
+        return "login success";
     }
 
 }
