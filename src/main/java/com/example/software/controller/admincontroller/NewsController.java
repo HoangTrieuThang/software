@@ -55,11 +55,11 @@ public class NewsController {
             News news =new News();
             news.setTitle(title);
             news.setContent(content);
+            news.setNewsKindId(newsKind.getNewsKindId());
             news.setNewsKind(newsKind);
             news.setNewsDate(new Date());
             news.setNewsDesc(newsDesc);
             news.setLikeCount(0);
-            news.setNewsDesc("test");
             News news1 = newsService.create(news,file);
             return ResponseEntity.status(200).body(news1);
         }
@@ -79,9 +79,9 @@ public class NewsController {
             news.setContent(content);
             news.setNewsKind(newsKind);
             news.setNewsDesc(newsDesc);
+            news.setNewsKindId(newsKind.getNewsKindId());
             news.setNewsDate(new Date());
             news.setLikeCount(0);
-            news.setNewsDesc("test");
             News news1 = newsService.update(id,news,file);
             return ResponseEntity.status(200).body(news1);
         }

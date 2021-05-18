@@ -101,8 +101,7 @@ private NewsKindService newsKindService;
                 throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
             }
         }
-        if (fileName != "" && file != null)
-            news1.setTitleImg("/api/admin/news/downloadFile/"+fileName);
+        if (fileName != "" && file != null) news1.setTitleImg("/api/admin/news/downloadFile/"+fileName);
         news1.setTitle(news.getTitle());
         news1.setContent(news.getContent());
         news1.setNewsDesc(news.getNewsDesc());

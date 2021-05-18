@@ -1,13 +1,17 @@
 package com.example.software.services;
 
+import com.example.software.model.Admin;
 import com.example.software.model.NewsKind;
 
+import java.util.List;
+
 public interface AdminAccountService {
-    NewsKind findNewsByNewKindId (Integer newKindId);
+    List<Admin> getAll();
+    Admin findAdminByAdminId (Integer id);
 
-    NewsKind create(NewsKind newsKind);
+    Admin create(Admin admin);
 
-    NewsKind update(Integer id, NewsKind newsKind) throws Exception;
+    Admin update(Integer id, Admin admin) throws Exception;
 
     void delete(Integer id);
 }
